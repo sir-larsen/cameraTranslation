@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.mlkit.common.model.DownloadConditions
+import com.google.mlkit.nl.languageid.LanguageIdentification
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
@@ -24,32 +25,83 @@ class MainActivity : AppCompatActivity() {
 
 
 ////Translation her: https://developers.google.com/ml-kit/language/translation/android
-        val options = TranslatorOptions.Builder()
-            .setSourceLanguage(TranslateLanguage.NORWEGIAN)
-            .setTargetLanguage(TranslateLanguage.ENGLISH)
-            .build()
-        val norwegianEnglishTranslator = Translation.getClient(options)
 
-        var conditions = DownloadConditions.Builder()
-            .requireWifi()
-            .build()
-        norwegianEnglishTranslator.downloadModelIfNeeded(conditions)
-            .addOnSuccessListener {
+        var transTekst = "Guten tag ich bin eine penis"
+        var kode = ""
+        val languageIdentifier = LanguageIdentification.getClient()
+        languageIdentifier.identifyLanguage(transTekst)
+            .addOnSuccessListener { languageCode ->
+                if (languageCode == "und") {
+                    println("CANNOT IDENTIFYYYYYY")
+                } else {
 
-                norwegianEnglishTranslator.translate("spis bæsj")
-                    .addOnSuccessListener { translatedText ->
-                        println(translatedText)
-                    }
-                    .addOnFailureListener { exception ->
+                    kode = languageCode
+                    println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+                    println(kode)
 
-                    }
+                    val options = TranslatorOptions.Builder()
+                        .setSourceLanguage(TranslateLanguage.fromLanguageTag(kode))
+                        .setTargetLanguage(TranslateLanguage.ENGLISH)
+                        .build()
+                    val norwegianEnglishTranslator = Translation.getClient(options)
 
+                    var conditions = DownloadConditions.Builder()
+                        .requireWifi()
+                        .build()
+                    norwegianEnglishTranslator.downloadModelIfNeeded(conditions)
+                        .addOnSuccessListener {
+
+                            norwegianEnglishTranslator.translate(transTekst)
+                                .addOnSuccessListener { translatedText ->
+                                    println(translatedText)
+                                }
+                                .addOnFailureListener { exception ->
+
+                                }
+
+                        }
+                        .addOnFailureListener { exception ->
+
+                            println(exception)
+
+                        }
+                }
             }
-            .addOnFailureListener { exception ->
-
-                println(exception)
-
+            .addOnFailureListener {
+                // Model couldn’t be loaded or other internal error.
+                // ...
             }
+
+/*
+        if (kode != "") {
+            val options = TranslatorOptions.Builder()
+                .setSourceLanguage(TranslateLanguage.fromLanguageTag(kode))
+                .setTargetLanguage(TranslateLanguage.ENGLISH)
+                .build()
+            val norwegianEnglishTranslator = Translation.getClient(options)
+
+            var conditions = DownloadConditions.Builder()
+                .requireWifi()
+                .build()
+            norwegianEnglishTranslator.downloadModelIfNeeded(conditions)
+                .addOnSuccessListener {
+
+                    norwegianEnglishTranslator.translate(transTekst)
+                        .addOnSuccessListener { translatedText ->
+                            println(translatedText)
+                        }
+                        .addOnFailureListener { exception ->
+
+                        }
+
+                }
+                .addOnFailureListener { exception ->
+
+                    println(exception)
+
+                }
+
+        } */
 
         //////////////////////////////////////////////////////////////////////////////////////////////////
 
