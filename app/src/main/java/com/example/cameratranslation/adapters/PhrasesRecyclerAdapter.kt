@@ -1,17 +1,22 @@
-package com.example.cameratranslation
+package com.example.cameratranslation.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cameratranslation.R
 
 
 /**
  * PhrasesRecyclerAdapter:
  */
-class PhrasesRecyclerAdapter(private val data: Map<String, Array<String>>, private val listener: OnThemeClickListener) :
-    RecyclerView.Adapter<PhrasesRecyclerAdapter.ViewHolder>() {
+class PhrasesRecyclerAdapter(
+    private val context: Context,
+    private val data: Map<String, Array<String>>,
+    private val listener: OnThemeClickListener
+): RecyclerView.Adapter<PhrasesRecyclerAdapter.ViewHolder>() {
 
 
 
@@ -19,8 +24,8 @@ class PhrasesRecyclerAdapter(private val data: Map<String, Array<String>>, priva
      * Create ViewHolder
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_phrases, parent, false)
-        return ViewHolder(view)
+        val adapterLayout = LayoutInflater.from(parent.context).inflate(R.layout.cardview_phrases, parent, false)
+        return ViewHolder(adapterLayout)
     }
 
     /**

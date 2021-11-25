@@ -1,7 +1,7 @@
-package com.example.cameratranslation
+package com.example.cameratranslation.data
 
 import android.content.Context
-
+import com.example.cameratranslation.R
 
 
 class PhrasesDataSource(private val ctx: Context) {
@@ -19,5 +19,4 @@ class PhrasesDataSource(private val ctx: Context) {
          Pair("Emergency",ctx.resources.getStringArray(R.array.Emergency))
      )
     }
-
 }
