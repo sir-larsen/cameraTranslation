@@ -69,7 +69,7 @@ class CameraFragment : androidx.fragment.app.Fragment() {
 
     private fun startCamera() {
         //Creating the text recognizer
-        textRecognizer = TextRecognizer.Builder(activity).build()
+        textRecognizer = TextRecognizer.Builder(activity?.applicationContext!!).build()
 
         if (!textRecognizer.isOperational) { //If not yet loaded
             Toast.makeText(activity, "Dependencies haven't loaded yet." +
@@ -79,7 +79,7 @@ class CameraFragment : androidx.fragment.app.Fragment() {
         }
 
         //Initialize the source for our camera, have to use high resolution and auto focus for this to work
-        mCameraSource = CameraSource.Builder(activity?.applicationContext, textRecognizer)
+        mCameraSource = CameraSource.Builder(activity?.applicationContext!!, textRecognizer)
             .setFacing(CameraSource.CAMERA_FACING_BACK)
             .setRequestedPreviewSize(1280, 1024)
             .setAutoFocusEnabled(true)
