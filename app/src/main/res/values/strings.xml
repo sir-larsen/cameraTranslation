@@ -6,7 +6,7 @@
     <string-array name="Transit">
         <item>Left, right, straight, back, turn around</item>
         <item>How long (duration)?</item>
-        <item >What time does it leave?</item>
+        <item>What time does it leave?</item>
         <item>How far?</item>
         <item>I lost my…</item>
         <item>I am going to…</item>
@@ -61,7 +61,7 @@
         <item>When do you open?</item>
         <item>Can I try?</item>
     </string-array>
-    
+
     <string-array name="Greeting">
         <item>Hello, my name is…</item>
         <item>I am from…</item>
