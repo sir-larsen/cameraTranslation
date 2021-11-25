@@ -15,4 +15,9 @@
         android:name="com.example.cameratranslation.PhrasesFragment"
         android:label="fragment_phrases"
         tools:layout="@layout/fragment_phrases" />
+    <fragment
+        android:id="@+id/translateFragment"
+        android:name="com.example.cameratranslation.TranslateFragment"
+        android:label="fragment_translate"
+        tools:layout="@layout/fragment_translate" />
 </navigation>

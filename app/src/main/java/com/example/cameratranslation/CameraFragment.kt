@@ -158,7 +158,7 @@ class CameraFragment : androidx.fragment.app.Fragment() {
 
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             if (isCameraGranted()) {
-                mCameraSource.start(binding?.surfaceCameraPreview?.holder)
+                mCameraSource.start(binding?.surfaceCameraPreview?.holder!!)
             } else {
                 Toast.makeText(activity, "NEED TO GRANT PERMISSION", Toast.LENGTH_LONG).show()
                 activity?.onBackPressed()
