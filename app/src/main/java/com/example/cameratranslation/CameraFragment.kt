@@ -35,6 +35,8 @@ class CameraFragment : androidx.fragment.app.Fragment() {
     private val camViewModel: CameraViewModel by activityViewModels() //ViewModel for translations
     private var binding: FragmentCameraBinding? = null //Databinding
 
+    //var act = activity as MainActivity //Instance of main activity to call the translate methods
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -59,7 +61,13 @@ class CameraFragment : androidx.fragment.app.Fragment() {
             cameraFragment = this@CameraFragment
         }
         startCamera()
+
         //Set click listeners here
+        binding?.materialCardView?.setOnClickListener {
+            var act = activity as MainActivity
+            var translatedText = camViewModel.stringToTrans.value?.let { it1 -> act.translate(it1) }
+            camViewModel.translatedText.value = translatedText
+        }
     }
 
     override fun onDestroyView() {
@@ -127,7 +135,8 @@ class CameraFragment : androidx.fragment.app.Fragment() {
                         stringBuilder.append("\n")
                     }
                     //camViewModel.stringToTrans.value = stringBuilder.toString()
-                    binding?.textToTranslate!!.text = stringBuilder.toString()
+                    //binding?.textToTranslate!!.text = stringBuilder.toString()
+                    camViewModel.stringToTrans.value = stringBuilder.toString()
                 }
             }
         })
