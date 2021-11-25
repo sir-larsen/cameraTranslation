@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.cameratranslation.databinding.FragmentPhrasesBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -16,10 +20,20 @@ private const val ARG_PARAM2 = "param2"
  * Use the [PhrasesFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PhrasesFragment : Fragment() {
+class PhrasesFragment : Fragment(), PhrasesRecyclerAdapter.OnThemeClickListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    //ViewBinding
+    private var _binding: FragmentPhrasesBinding? = null
+    private val binding get() = _binding!!
+
+    private val data = mapOf<String, String>(Pair("Key1", "Val2"))
+
+    //RecyclerView
+    private lateinit var RecyclerView: RecyclerView
+    private val adapter = PhrasesRecyclerAdapter(data,this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +48,11 @@ class PhrasesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_phrases, container, false)
+        _binding = FragmentPhrasesBinding.inflate(inflater, container, false)
+        binding.themesRecyclerView.setHasFixedSize(true)
+        binding.themesRecyclerView.layoutManager = LinearLayoutManager(view?.context)
+        binding.themesRecyclerView.adapter = adapter
+        return binding.root
     }
 
     companion object {
@@ -55,5 +73,10 @@ class PhrasesFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onFoodClick(position: Int) {
+        val clicked = data.keys.elementAt(position)
+        Toast.makeText(context, data[clicked], Toast.LENGTH_SHORT).show()
     }
 }
