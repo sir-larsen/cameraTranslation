@@ -22,9 +22,7 @@ import java.lang.StringBuilder
 import kotlin.properties.Delegates
 
 /**
- * A simple [Fragment] subclass.
- * Use the [CameraFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * [CameraFragment] Used for rendering translated text to user live
  */
 class CameraFragment : androidx.fragment.app.Fragment() {
     private val CAMERA_PERMISSION_REQUEST = 100
@@ -34,10 +32,6 @@ class CameraFragment : androidx.fragment.app.Fragment() {
 
     private val camViewModel: CameraViewModel by activityViewModels() //ViewModel for translations
     private var binding: FragmentCameraBinding? = null //Databinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +53,13 @@ class CameraFragment : androidx.fragment.app.Fragment() {
             cameraFragment = this@CameraFragment
         }
         startCamera()
+
         //Set click listeners here
+        binding?.materialCardView?.setOnClickListener {
+            val act = activity as MainActivity
+            val translatedText = camViewModel.stringToTrans.value?.let { it1 -> act.translate(it1) }
+            camViewModel.translatedText.value = translatedText
+        }
     }
 
     override fun onDestroyView() {
@@ -69,7 +69,7 @@ class CameraFragment : androidx.fragment.app.Fragment() {
 
     private fun startCamera() {
         //Creating the text recognizer
-        textRecognizer = TextRecognizer.Builder(activity).build()
+        textRecognizer = TextRecognizer.Builder(activity?.applicationContext!!).build()
 
         if (!textRecognizer.isOperational) { //If not yet loaded
             Toast.makeText(activity, "Dependencies haven't loaded yet." +
@@ -79,7 +79,7 @@ class CameraFragment : androidx.fragment.app.Fragment() {
         }
 
         //Initialize the source for our camera, have to use high resolution and auto focus for this to work
-        mCameraSource = CameraSource.Builder(activity?.applicationContext, textRecognizer)
+        mCameraSource = CameraSource.Builder(activity?.applicationContext!!, textRecognizer)
             .setFacing(CameraSource.CAMERA_FACING_BACK)
             .setRequestedPreviewSize(1280, 1024)
             .setAutoFocusEnabled(true)
@@ -127,7 +127,8 @@ class CameraFragment : androidx.fragment.app.Fragment() {
                         stringBuilder.append("\n")
                     }
                     //camViewModel.stringToTrans.value = stringBuilder.toString()
-                    binding?.textToTranslate!!.text = stringBuilder.toString()
+                    //binding?.textToTranslate!!.text = stringBuilder.toString()
+                    camViewModel.stringToTrans.value = stringBuilder.toString()
                 }
             }
         })
