@@ -29,11 +29,10 @@ class PhrasesFragment : Fragment(), PhrasesRecyclerAdapter.OnThemeClickListener 
     private var _binding: FragmentPhrasesBinding? = null
     private val binding get() = _binding!!
 
-    private val data = mapOf<String, String>(Pair("Key1", "Val2"))
+    //Datasource
+    private lateinit var phraseData : Map<String, Array<String>>
 
-    //RecyclerView
-    private lateinit var RecyclerView: RecyclerView
-    private val adapter = PhrasesRecyclerAdapter(data,this)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,11 +46,18 @@ class PhrasesFragment : Fragment(), PhrasesRecyclerAdapter.OnThemeClickListener 
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        //Fetch data
+        phraseData = PhrasesDataSource(requireContext()).loadPhrase()
+
         // Inflate the layout for this fragment
         _binding = FragmentPhrasesBinding.inflate(inflater, container, false)
         binding.themesRecyclerView.setHasFixedSize(true)
         binding.themesRecyclerView.layoutManager = LinearLayoutManager(view?.context)
-        binding.themesRecyclerView.adapter = adapter
+        binding.themesRecyclerView.adapter = PhrasesRecyclerAdapter(phraseData, this)
+
+
+
         return binding.root
     }
 
@@ -75,8 +81,9 @@ class PhrasesFragment : Fragment(), PhrasesRecyclerAdapter.OnThemeClickListener 
             }
     }
 
-    override fun onFoodClick(position: Int) {
-        val clicked = data.keys.elementAt(position)
-        Toast.makeText(context, data[clicked], Toast.LENGTH_SHORT).show()
+    override fun onThemeClick(position: Int) {
+        val clicked = phraseData.keys.elementAt(position)
+
+        Toast.makeText(context, phraseData[clicked]?.get(0), Toast.LENGTH_SHORT).show()
     }
 }

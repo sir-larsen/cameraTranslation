@@ -2,4 +2,87 @@
     <string name="app_name">cameraTranslation</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="Transit">
+        <item>Left, right, straight, back, turn around</item>
+        <item>How long (duration)?</item>
+        <item >What time does it leave?</item>
+        <item>How far?</item>
+        <item>I lost my…</item>
+        <item>I am going to…</item>
+        <item>I came from…</item>
+        <item>I leave on…</item>
+        <item>Where is…</item>
+        <item>Airport</item>
+        <item>Bus / train station</item>
+    </string-array>
+
+    <string-array name="Health">
+        <item>I am allergic to…</item>
+        <item>This hurts [signal body part]</item>
+        <item>I need antibiotics</item>
+        <item>Where is the pharmacy</item>
+        <item>Tampons / sanitary pads</item>
+        <item>Probiotics</item>
+        <item>Contact lens solution</item>
+        <item>Sunscreen</item>
+    </string-array>
+
+    <string-array name="Accommodation">
+        <item>Toilet paper</item>
+        <item>Throw it in the toilet or trash can?</item>
+        <item>Can I drink the tap water?</item>
+        <item>Bed bugs!</item>
+        <item>Air conditioner / fan</item>
+        <item>I lost my key</item>
+        <item>[X] is not working</item>
+        <item>Laundry</item>
+    </string-array>
+
+    <string-array name="Dining">
+        <item>Can I have</item>
+        <item>Bottled Water</item>
+        <item>I am allergic to</item>
+        <item>Is it spicy?</item>
+        <item>Where is the bathroom?</item>
+        <item>Check, please!</item>
+        <item>Do you take credit cards?</item>
+        <item>Is the tip included?</item>
+    </string-array>
+
+    <string-array name="Shopping">
+        <item>How much?</item>
+        <item>Is there a discount?</item>
+        <item>Too expensive</item>
+        <item>I\'m not interested / No, thank you</item>
+        <item>Do you have change?</item>
+        <item>Where is the bank?</item>
+        <item>When do you close?</item>
+        <item>When do you open?</item>
+        <item>Can I try?</item>
+    </string-array>
+    
+    <string-array name="Greeting">
+        <item>Hello, my name is…</item>
+        <item>I am from…</item>
+        <item>I am studying...</item>
+        <item>Do you speak English?</item>
+        <item>Sorry</item>
+        <item>Slowly, please</item>
+        <item>I don’t understand</item>
+        <item>Goodbye!</item>
+        <item>Do you have a phone charger?</item>
+    </string-array>
+
+
+    <string-array name="Emergency">
+        <item>Call the police</item>
+        <item>Call the ambulance</item>
+        <item>I am hurt</item>
+        <item>I need a hospital / doctor</item>
+        <item>Fire</item>
+        <item>Help me</item>
+    </string-array>
+
+
 </resources>
