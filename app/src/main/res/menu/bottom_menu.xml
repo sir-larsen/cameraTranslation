@@ -3,11 +3,16 @@
 
     <item
         android:id="@+id/cameraFragment"
-        android:title="Item"
+        android:title="Camera"
         android:icon="@drawable/ic_baseline_camera_alt_24" />
 
     <item
+        android:id="@+id/translateFragment"
+        android:title="Translator"
+        android:icon="@drawable/ic_baseline_g_translate_24"/>
+
+    <item
         android:id="@+id/phrasesFragment"
-        android:title="Item"
+        android:title="Phrases"
         android:icon="@drawable/ic_baseline_text_snippet_24"/>
 </menu>
