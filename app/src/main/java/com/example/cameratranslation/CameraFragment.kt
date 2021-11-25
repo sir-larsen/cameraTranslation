@@ -22,9 +22,7 @@ import java.lang.StringBuilder
 import kotlin.properties.Delegates
 
 /**
- * A simple [Fragment] subclass.
- * Use the [CameraFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * [CameraFragment] Used for rendering translated text to user live
  */
 class CameraFragment : androidx.fragment.app.Fragment() {
     private val CAMERA_PERMISSION_REQUEST = 100
@@ -34,12 +32,6 @@ class CameraFragment : androidx.fragment.app.Fragment() {
 
     private val camViewModel: CameraViewModel by activityViewModels() //ViewModel for translations
     private var binding: FragmentCameraBinding? = null //Databinding
-
-    //var act = activity as MainActivity //Instance of main activity to call the translate methods
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,8 +56,8 @@ class CameraFragment : androidx.fragment.app.Fragment() {
 
         //Set click listeners here
         binding?.materialCardView?.setOnClickListener {
-            var act = activity as MainActivity
-            var translatedText = camViewModel.stringToTrans.value?.let { it1 -> act.translate(it1) }
+            val act = activity as MainActivity
+            val translatedText = camViewModel.stringToTrans.value?.let { it1 -> act.translate(it1) }
             camViewModel.translatedText.value = translatedText
         }
     }

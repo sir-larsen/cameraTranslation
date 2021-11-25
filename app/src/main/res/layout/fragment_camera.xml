@@ -42,7 +42,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/surface_camera_preview"
-            tools:text="Pre COCK" />
+            tools:text="" />
 
         <TextView
             android:id="@+id/translated_text"
@@ -57,7 +57,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_to_translate"
-            tools:text="Cock" />
+            tools:text="" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
