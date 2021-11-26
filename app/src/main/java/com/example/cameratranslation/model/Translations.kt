@@ -1,4 +1,6 @@
 package com.example.cameratranslation.model
 
-class Translations {
-}
+data class TranslationItem(
+    val originalText: String,
+    var translatedText: String
+)

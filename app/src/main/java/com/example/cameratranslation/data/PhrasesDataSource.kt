@@ -2,21 +2,31 @@ package com.example.cameratranslation.data
 
 import android.content.Context
 import com.example.cameratranslation.R
+import com.example.cameratranslation.model.TranslationItem
 
 
-class PhrasesDataSource(private val ctx: Context) {
-    /**
-     * Loads list of strings from resources
-     */
-     fun loadPhrase(): Map<String, Array<String>>{
-     return mapOf<String, Array<String>>(
-         Pair("Transit", ctx.resources.getStringArray(R.array.Transit)),
-         Pair("Health", ctx.resources.getStringArray(R.array.Health)),
-         Pair("Accommodation",ctx.resources.getStringArray(R.array.Accommodation)),
-         Pair("Dining",ctx.resources.getStringArray(R.array.Dining)),
-         Pair("Shopping",ctx.resources.getStringArray(R.array.Shopping)),
-         Pair("Greeting", ctx.resources.getStringArray(R.array.Greeting)),
-         Pair("Emergency",ctx.resources.getStringArray(R.array.Emergency))
-     )
+object PhrasesDataSource {
+    fun loadTransitPhrases(ctx: Context): List<TranslationItem> {
+        return listOf<TranslationItem>(
+            TranslationItem(ctx.resources.getString(R.string.transit1), ""),
+            TranslationItem(ctx.resources.getString(R.string.transit2), ""),
+            TranslationItem(ctx.resources.getString(R.string.transit3), "")
+        )
+    }
+
+    fun loadHealthPhrases(ctx: Context): List<TranslationItem> {
+        return listOf<TranslationItem>(
+            TranslationItem(ctx.resources.getString(R.string.health1), ""),
+            TranslationItem(ctx.resources.getString(R.string.health2), ""),
+            TranslationItem(ctx.resources.getString(R.string.health3), "")
+        )
+    }
+
+    fun loadDiningPhrases(ctx: Context): List<TranslationItem> {
+        return listOf<TranslationItem>(
+            TranslationItem(ctx.resources.getString(R.string.Dining1), ""),
+            TranslationItem(ctx.resources.getString(R.string.Dining2), ""),
+            TranslationItem(ctx.resources.getString(R.string.Dining3), "")
+        )
     }
 }

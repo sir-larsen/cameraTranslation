@@ -5,55 +5,72 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.example.cameratranslation.data.PhrasesDataSource
+import com.example.cameratranslation.databinding.FragmentCameraBinding
+import com.example.cameratranslation.databinding.FragmentPhrasesBinding
+import com.example.cameratranslation.viewmodels.DetailViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PhrasesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PhrasesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val detViewModel : DetailViewModel by activityViewModels()
+    private var binding: FragmentPhrasesBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val fragmentBinding = FragmentPhrasesBinding.inflate(inflater, container, false)
+        binding = fragmentBinding
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_phrases, container, false)
+        //return inflater.inflate(R.layout.fragment_camera, container, false)
+        return fragmentBinding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PhrasesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PhrasesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.apply {
+            viewModel = detViewModel
+            lifecycleOwner = viewLifecycleOwner
+            phrasesFragment = this@PhrasesFragment
+        }
+        val act = activity as MainActivity
+        //Set click listeners
+        binding?.transit?.setOnClickListener {
+            var phrases = context?.let { it1 -> PhrasesDataSource.loadTransitPhrases(it1) }
+            if (phrases != null) {
+                detViewModel.getTransit(phrases)
             }
+            for (trans in detViewModel.phrases!!) {
+                trans.translatedText = act.translate(trans.originalText).toString()
+            }
+            goToDetails()
+        }
+        binding?.Health?.setOnClickListener {
+            var phrases = context?.let { it1 -> PhrasesDataSource.loadHealthPhrases(it1) }
+            if (phrases != null) {
+                detViewModel.getHealth(phrases)
+            }
+            for (trans in detViewModel.phrases!!) {
+                trans.translatedText = act.translate(trans.originalText).toString()
+            }
+            goToDetails()
+        }
+        binding?.Dining?.setOnClickListener {
+            var phrases = context?.let { it1 -> PhrasesDataSource.loadDiningPhrases(it1) }
+            if (phrases != null) {
+                detViewModel.getDining(phrases)
+            }
+            for (trans in detViewModel.phrases!!) {
+                trans.translatedText = act.translate(trans.originalText).toString()
+            }
+            goToDetails()
+        }
+    }
+
+    fun goToDetails() {
+        findNavController().navigate(R.id.action_phrasesFragment_to_listFragment)
     }
 }

@@ -3,6 +3,18 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="transit1">What time does it leave?</string>
+    <string name="transit2">I came from</string>
+    <string name="transit3">Airport</string>
+
+    <string name="health1">I am allergic to</string>
+    <string name="health2">I need antibiotics</string>
+    <string name="health3">Sunscreen</string>
+
+    <string name="Dining1">Is it spicy?</string>
+    <string name="Dining2">Do you take credit cards?</string>
+    <string name="Dining3">Where is the bathroom?</string>
+
     <string-array name="Transit">
         <item>Left, right, straight, back, turn around</item>
         <item>How long (duration)?</item>

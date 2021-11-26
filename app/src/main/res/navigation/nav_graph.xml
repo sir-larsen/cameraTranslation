@@ -14,10 +14,19 @@
         android:id="@+id/phrasesFragment"
         android:name="com.example.cameratranslation.PhrasesFragment"
         android:label="fragment_phrases"
-        tools:layout="@layout/fragment_phrases" />
+        tools:layout="@layout/fragment_phrases" >
+        <action
+            android:id="@+id/action_phrasesFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
     <fragment
         android:id="@+id/translateFragment"
         android:name="com.example.cameratranslation.TranslateFragment"
         android:label="fragment_translate"
         tools:layout="@layout/fragment_translate" />
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.cameratranslation.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" />
 </navigation>
